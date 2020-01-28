@@ -1,0 +1,117 @@
+<div class="row my-3">
+    <div class="col-md-10">
+        <h4>List Of Products</h4>
+    </div>
+    <div class="col-md-2">
+        <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addProductModal"><i class="fa fa-plus"></i></button>
+    </div>
+</div>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col">Opperations</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let produit of produits">
+            <th scope="row">{{produit.id}}</th>
+            <td>{{produit.name}}</td>
+            <td>{{produit.price}}</td>
+            <td>{{produit.description}}</td>
+            <td>{{produit.category.name}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="upDateProduitById(produit.id)" data-toggle="modal" data-target="#updateProductModal"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger" (click)="deleteProduit(produit)"><i class="fa fa-trash"></i></button></td>
+        </tr>
+    </tbody>
+</table>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            
+        </div>
+    </div>
+</div> -->
+
+<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="ProduitForm" (ngSubmit)="AddProduit()">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="example" placeholder="hassan" formControlName="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" class="form-control" id="example" placeholder="120Dhs" formControlName="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="categories">Categories</label>
+                        <select class="form-control" formControlName="category">
+                        <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.name}}</option>
+                    </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Produit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="modal fade" id="updateProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" #closebutton2 class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="UpdateProduitForm" (ngSubmit)="upDateProduit()">
+
+                    <label for="price"></label>
+                    <input type="text" class="form-control" id="example" placeholder="hassan" formControlName="id" disabled>
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="example" placeholder="hassan" formControlName="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price</label>
+                        <input type="text" class="form-control" id="example" placeholder="120Dhs" formControlName="price">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="categories">Categories</label>
+                        <select class="form-control" formControlName="category">
+                        <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.name}}</option>
+                    </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Produit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
